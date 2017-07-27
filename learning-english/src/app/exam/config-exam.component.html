@@ -1,0 +1,94 @@
+<div class="card">
+
+    <!--TITULO-->
+    <div class="card-header card-inverse card-primary mb-3 text-center" style="font-weight: bold;">
+
+        <label>CONFIG EXAM</label>                                    
+    </div>
+
+    <!--BODY-->
+    <div class="card-block">
+
+        <span *ngIf="lesson" class="ico-tab-lesson {{lesson.icon}}"> {{lesson.name | capitalize}}</span>
+
+        <form novalidate [formGroup]="form">
+
+            Formulario: {{form.value | json}}
+
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <label class="control-label font-weight-bold">QUESTIONS IN?</label>
+                <br>
+                <label class="radio-inline" style="font-size: 15px"><input type="radio" name="questionLanguaje" formControlName="questionLanguaje" value="SPANISH" (change)="changeAnswer(form.value)" />Spanish</label>
+                <label class="radio-inline" style="font-size: 15px"><input type="radio" name="questionLanguaje" formControlName="questionLanguaje" value="ENGLISH" (change)="changeAnswer(form.value)" />English</label>
+            </div>
+            <div class="col-md-6 text-center">
+                <label class="control-label font-weight-bold">ANSWER IN?</label>
+                <br>
+                <label class="radio-inline" style="font-size: 15px"><input type="radio" name="radioAnswer" formControlName="radioAnswer" [(ngModel)]='radioAnswer' value="SPANISH" />Spanish</label>
+                <label class="radio-inline" style="font-size: 15px"><input type="radio" name="radioAnswer" formControlName="radioAnswer" [(ngModel)]='radioAnswer' value="ENGLISH" />English</label>
+            </div>
+        </div>
+
+        <hr class="config" />
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <label class="control-label font-weight-bold">TYPE OF EXAM</label>
+                <br>
+                <label class="radio-inline" style="font-size: 15px"><input type="radio" name="typeQuestion" formControlName="typeQuestion" value="MULTICHOICE" />Multichoice</label>
+                <label class="radio-inline" style="font-size: 15px"><input type="radio" name="typeQuestion" formControlName="typeQuestion" value="WRITING" />Writing</label>
+                <label class="radio-inline" style="font-size: 15px"><input type="radio" name="typeQuestion" formControlName="typeQuestion" value="LISTENING" />Listening</label>
+            </div>
+        </div>
+
+        <hr class="config" />
+
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <label class="control-label font-weight-bold">NUMBER OF QUESTIONS</label>
+                <br>
+                <input type="number" value="1" min="1" max="{{lesson.questions}}" class="form-control" formControlName="numberOfQuestion"/>
+            </div>
+            <div class="col-md-6 text-center">
+                <label class="control-label font-weight-bold">ORDER QUESTIONS</label>
+                <br>
+                <select class="form-control"  formControlName="orderQuestions">
+                    <option value="RANDOM" selected>Random</option>
+                    <option value="ASCENDING">Ascending (A - Z)</option>
+                    <option value="DESCENDING">Descending (Z - A)</option>
+                    <option value="DEFAULT">Default</option>
+                </select>
+            </div>
+        </div>
+
+        <hr class="config" />
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <label class="control-label font-weight-bold">TIME TO EXAM</label>
+            </div>
+            <div class="col-md-offset-3 col-md-3 text-center">
+                <label class="switch">
+                    <input class="switch-input checkSwitch" type="checkbox" />
+                    <span class="switch-label" data-on="On" data-off="Off"></span>
+                    <span class="switch-handle"></span>
+                </label>
+            </div>
+            <div class="col-md-4 text-center">
+                <input type="time" class="form-control" max="23:59:59" min="00:00:00" step="1" formControlName="time"/>
+            </div> 
+
+        </div>
+
+        </form>
+
+    </div>
+
+    <!--FOOTER-->
+    <div class="card-footer text-center">
+        <button type="button" class="btn btn-default" (click)="goToLesson()"><span class="icon-undo2"></span> Back</button>
+        <button type="button" class="btn btn-primary" (click)="goToExam()" [disabled]="!form.valid"><span class="icon-writing"></span> Exam</button>
+    </div>
+
+</div>

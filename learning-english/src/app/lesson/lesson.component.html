@@ -1,0 +1,37 @@
+<button class="btn btn-primary config-exam" *ngIf="lesson" (click)="changeOption('config')"><span class="icon-redo2"></span> Go to the exam</button>
+<br>
+<input type="text" (keydown)="keyPress($event)"/>
+<br>
+<br>
+
+<div *ngIf="lesson">
+    <!-- CLASS LESSON -->
+    <div *ngIf="option == 'class'">
+
+        <div class="col text-center fixedheader">
+            <span *ngIf="lesson" class="ico-tab-lesson {{lesson.icon}}"> {{lesson.name | capitalize}}</span>
+            <hr>
+        </div>
+
+        <!-- *** LESSON CUSTOM *** -->
+        <!--VERBS-->
+        <lesson-verbs *ngIf="lesson.lessonType.id == '4' && (lesson.id == '13_1' || lesson.id == '13_2')" [id]="lesson.id" (length)="getLength($event)"></lesson-verbs>
+    
+        <!-- FOOTER -->
+        <footer class="fixedfooter">
+            <hr>
+            {{option}}
+            <div class="col text-center">
+            <button routerLink="/home" class="btn btn-primary return-home"><span class="icon-home"></span> Return home</button>
+            <button class="btn btn-primary config-exam" *ngIf="lesson" (click)="changeOption('config')"><span class="icon-redo2"></span> Go to the exam</button>
+            </div>
+            <br>
+        </footer>
+    </div>
+    <!-- CONFIG EXAM -->
+    <config-exam *ngIf="option == 'config'" [lesson]="lesson" (option)="getOption($event)" (configExam)="getConfigExam($event)"></config-exam>
+    <!-- EXAM -->
+    <exam *ngIf="option == 'exam'" [id]="lesson.id" [configExam]="configExam" [vocabularyType]="vocabularyType" (optionEvent)="getOption($event)" (examToScoreEvent)="getExamToScoreEvent($event)"></exam>
+    <!-- SCORE -->
+    <score *ngIf="option == 'score'" [examToScoreEvent]="examToScoreEvent" (optionEvent)="getOption($event)"></score>
+</div>

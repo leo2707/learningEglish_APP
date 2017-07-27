@@ -1,0 +1,34 @@
+.ico-tab-lesson {
+    font-size: 30px;
+    text-transform: capitalize;
+}
+
+.content {
+    width: 80%;
+    margin: 0 auto;
+    padding: 60px 0;
+}
+
+.header-cont {
+    width:100%;
+    position:fixed;
+    top:0px;
+}
+
+/*.fixedheader {
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	background:#e6eecc url(http://localhost/Powersoft/img/background/beige_paper.png) repeat top left;
+	padding:10px;
+}
+.fixedfooter {
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	width:100%;
+	background:#e6eecc url(http://localhost/Powersoft/img/background/beige_paper.png) repeat top left;
+    padding-bottom:10px;
+}*/
+

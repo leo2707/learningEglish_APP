@@ -1,0 +1,11 @@
+/* General */
+/*@import "theme/css/normalize.css";*/
+/*@import "theme/css/framework/bootstrap/bootstrap.min.css";`*/
+
+@import "theme/icons/general/style.css";
+@import "theme/css/table-style.css";
+@import "theme/css/panel.css";
+
+body {
+    background:#e6eecc url(http://localhost/Powersoft/img/background/beige_paper.png) repeat top left;
+}

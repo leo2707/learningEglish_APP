@@ -1,0 +1,78 @@
+input {
+    text-align: center;
+    font-weight: bold;
+}
+hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid grey;
+    margin: 1em 0;
+    padding: 0; 
+}
+hr.config{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.div-class{
+    height: 100px;
+    margin: 5%;
+}
+.border-item{
+    border: 1px dashed grey;
+    padding: 5px;
+    margin: 5px;
+}
+.div-class{
+    height: 100px;
+    margin: 5%;
+    border-radius: 50%;
+}
+.div-class-text{
+    text-align: center; 
+    vertical-align: middle; 
+    position: relative;
+}
+.div-class-img{
+    height: 130px;
+    margin: 5%;
+}
+.border-item{
+    border: 1px dashed grey;
+    padding: 5px;
+    margin: 5px;
+}
+img.resize{
+    width: 170px;
+    height: 130px;
+    border-radius: 6px;
+}
+.input-group-addon.icon-volume-medium:hover{
+    color: #286090;
+}
+.config-exam, .return-home{
+    margin-bottom: 15px;
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: white;
+}
+.name-lesson {
+    text-transform: capitalize;
+}
+.ico-tab-lesson{
+    font-size: 30px;
+    text-transform: capitalize;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    cursor: default;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    border-bottom-color: transparent;
+}
+.nav>li>a {
+    background-color: #fff;
+}

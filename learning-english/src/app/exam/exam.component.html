@@ -1,0 +1,69 @@
+<div class="row justify-content-md-center">
+    <div class="col-md-2">
+
+        <table class="table text-center">
+            <thead class="thead-blue">
+                <tr>
+                    <th colspan="2">SCORE ({{position}}/{{countAnswer}})</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="icon-checkmark" style="color: green;"></span></td>
+                    <td><span class="icon-cross" style="color: red;"></span></td>
+                </tr>
+                <tr>
+                    <td>{{correctAnswers}}</td>
+                    <td>{{mistakes}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!--FIN TABLE SCORE-->
+    </div>
+</div>
+
+<br>
+
+<!--WRITING EXAM-->
+<div *ngIf="question && configExam.typeQuestion == 'WRITING'">
+    <div class="row justify-content-md-center">
+        <div class="col-md-6">
+            <div class="card">
+                <!--HEADER-->
+                <div class="card-header card-inverse card-primary mb-3 text-center" style="font-weight: bold;">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <label>{{question.question}} is?</label>
+                        </div>
+                    </div>
+                </div>
+                <!--BODY-->
+                <div class="card-block">
+                    <form novalidate [formGroup]="form">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="control-label">Answer</label>
+                                <br>
+                                <input class="form-control answer" type="text" formControlName="answer" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer">
+                    <div class="text-right">
+                        <div *ngIf="position < countAnswer; else other_content_button">
+                            <button type="button" class="btn btn-primary next" (click)="validateQuestion()">Next</button>
+                        </div>
+                        <ng-template #other_content_button>
+                            <button type="button" class="btn btn-primary finish" (click)="validateQuestion()">Finish</button>
+                        </ng-template>
+                    </div>
+                </div>
+
+            </div>
+            <!--FIN PANEL-->
+
+        </div>
+    </div>
+</div>
