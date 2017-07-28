@@ -13,7 +13,7 @@ import { GetVocabularyRs } from '../_beans.model/getVocabularyRs';
 import {Status} from '../_beans/_generic/status';
 
 @Injectable()
-export class LessonService {
+export class VocabularyService {
 
   private headers = new Headers({'Content-Type':'application/json'});
   private url = "http://localhost:8080/RestProvider/rest/learningEnglish";

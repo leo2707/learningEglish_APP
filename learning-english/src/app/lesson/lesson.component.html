@@ -2,6 +2,7 @@
 <br>
 <input type="text" (keydown)="keyPress($event)"/>
 <br>
+{{lesson | json}}
 <br>
 
 <div *ngIf="lesson">
@@ -12,8 +13,14 @@
             <span *ngIf="lesson" class="ico-tab-lesson {{lesson.icon}}"> {{lesson.name | capitalize}}</span>
             <hr>
         </div>
+        
+        <!-- *** LESSON - GRAMMAR *** -->
+        <lesson-grammar *ngIf="lesson.lessonType.id == '1'" [id]="lesson.id" (length)="getLength($event)"></lesson-grammar>
 
-        <!-- *** LESSON CUSTOM *** -->
+        <!-- *** LESSON - IMAGES *** -->
+        <lesson-images *ngIf="lesson.lessonType.id == '3'" [id]="lesson.id" (length)="getLength($event)"></lesson-images>
+
+        <!-- *** LESSON - CUSTOM *** -->
         <!--VERBS-->
         <lesson-verbs *ngIf="lesson.lessonType.id == '4' && (lesson.id == '13_1' || lesson.id == '13_2')" [id]="lesson.id" (length)="getLength($event)"></lesson-verbs>
     

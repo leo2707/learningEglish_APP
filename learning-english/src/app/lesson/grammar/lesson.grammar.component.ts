@@ -7,7 +7,7 @@ import { GetLessonRq} from '../../_beans.model/getLessonRq';
 import { GetLessonRs} from '../../_beans.model/getLessonRs';
 
 @Component({
-  selector: 'app-lesson-grammar',
+  selector: 'lesson-grammar',
   templateUrl: './lesson.grammar.component.html',
   styleUrls: ['./lesson.grammar.component.css'],
   providers: [LessonService]
@@ -24,7 +24,7 @@ export class LessonGrammarComponent implements OnInit {
   
 
   ngOnInit() {
-    
+    console.log("ENtrooo");
   }
 
   getLesson(id): void {

@@ -7,9 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HomeComponent } from './home/home.component';
+
 import { LessonComponent } from './lesson/lesson.component';
-import { LessonGraphicsImagesComponent } from './lesson/graphics-images/lesson.graphics.images.component';
+import { LessonGrammarComponent } from './lesson/grammar/lesson.grammar.component';
+import { LessonImagesComponent } from './lesson/images/lessonImages.component';
 import { LessonVerbsComponent } from './lesson/custom/lesson.verbs.component';
+
 import { ConfigExamComponent } from './exam/config-exam.component';
 import { ExamComponent } from './exam/exam.component';
 import { ScoreComponent } from './score/score.component';
@@ -24,7 +27,8 @@ import { CapitalizePipe } from './util/_pipes/capitalize.pipe';
     CapitalizePipe,
     HomeComponent,
     LessonComponent,
-    LessonGraphicsImagesComponent,
+    LessonGrammarComponent,
+    LessonImagesComponent,
     LessonVerbsComponent,
     ConfigExamComponent,
     ExamComponent,
