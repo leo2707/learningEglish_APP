@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef  } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd} from '@angular/router';
 
 import { Lesson} from '../_beans/lesson';
@@ -19,6 +19,7 @@ import { LessonService } from '../_service/lesson.service';
   selector: 'app-lesson',
   templateUrl: './lesson.component.html',
   styleUrls: ['./lesson.component.css'],
+  encapsulation: ViewEncapsulation.None,
   providers: [LessonService]
 })
 export class LessonComponent implements OnInit {
@@ -33,15 +34,16 @@ export class LessonComponent implements OnInit {
     examToScoreEvent: ExamToScoreEvent;
 
     constructor(private route:ActivatedRoute,
-    private router:Router,
-    private lessonService: LessonService) { }
+      private elementRef: ElementRef,
+      private router:Router,
+      private lessonService: LessonService) { }
   
 
   ngOnInit() {    
       let id = this.route.snapshot.params['id'];
       console.log("id: "+id);
       this.getLesson(id);
-      this.changeOption('class');
+       this.changeOption('class');     
       // this.changeOption('config');
   }
 
@@ -74,7 +76,6 @@ export class LessonComponent implements OnInit {
   }
 
   getConfigExam(val){
-    console.log("Exam: "+JSON.stringify(val));
     this.configExam = val;
   }
 
@@ -90,9 +91,19 @@ export class LessonComponent implements OnInit {
     }
   }
 
-  keyPress(event: KeyboardEvent){
-    console.log("KEY:" +JSON.stringify(event));
-    console.log("KEY:" +event.key);
-  }
+  play(event) {
+
+    console.log("entro prueba: ");
+    console.log("ID: "+event.target.id); 
+    console.log("ELEMENT: "+event.target); 
+    console.log("ELEMENT2: "+event.target.firstElementChild.id); 
+    event.target.firstElementChild.play();
+    // console.log("entro prueba: "+event);
+    // console.log("entro prueba: "+event.id);
+    // // ele.firstElementChild.play();
+    // // console.log("entro prueba: "+JSON.stringify(ele));
+    // let input = this.elementRef.nativeElement.querySelector('.icon-volume-medium')
+    // console.log("entro prueba 2: "+input.id);
+}
 
 }

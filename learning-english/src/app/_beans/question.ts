@@ -1,6 +1,7 @@
 export class Question {
   idQuestion: number;
-  question: string;
+  questionText: string;
+  questionAudio: string;
   answer: string;
   answerUser: string;
   check: string;

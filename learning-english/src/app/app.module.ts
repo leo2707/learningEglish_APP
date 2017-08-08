@@ -11,7 +11,9 @@ import { HomeComponent } from './home/home.component';
 import { LessonComponent } from './lesson/lesson.component';
 import { LessonGrammarComponent } from './lesson/grammar/lesson.grammar.component';
 import { LessonImagesComponent } from './lesson/images/lessonImages.component';
-import { LessonVerbsComponent } from './lesson/custom/lesson.verbs.component';
+import { LessonColorsComponent } from './lesson/custom/colors/lessonColors.component';
+import { LessonVerbsComponent } from './lesson/custom/verbs/lesson.verbs.component';
+import { LessonVocabularyComponent } from './lesson/vocabulary/lessonVocabulary.component';
 
 import { ConfigExamComponent } from './exam/config-exam.component';
 import { ExamComponent } from './exam/exam.component';
@@ -20,16 +22,21 @@ import { ScoreComponent } from './score/score.component';
 import { ThemeService } from './_service/theme.service';
 
 import { CapitalizePipe } from './util/_pipes/capitalize.pipe';
+import { KeysPipe } from './util/_pipes/KeysPipe.pipe';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     CapitalizePipe,
+    KeysPipe,
     HomeComponent,
     LessonComponent,
     LessonGrammarComponent,
     LessonImagesComponent,
+    LessonColorsComponent,
     LessonVerbsComponent,
+    LessonVocabularyComponent,
     ConfigExamComponent,
     ExamComponent,
     ScoreComponent

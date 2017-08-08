@@ -26,13 +26,16 @@ export class ConfigExamComponent implements OnInit {
 
   ngOnInit() {
     this.createControls();
+
+    console.log("TIME: "+this.form.controls.time.disabled);
   }
 
   createControls(){
     this.form = this.formBuilder.group({
       questionLanguaje: ['SPANISH', Validators.required],
-      radioAnswer: [{value: 'ENGLISH', disabled: true}, Validators.required],
-      typeQuestion: ['WRITING', Validators.required],
+      answerLanguaje: [{value: 'ENGLISH', disabled: true}, Validators.required],
+      typeQuestion: ['TEXT', Validators.required],
+      typeAnswer: ['MULTICHOICE', Validators.required],
       numberOfQuestion: ['2', Validators.required],
       orderQuestions: ['RANDOM', Validators.required],
       time: [{value: '01:00:00', disabled: true}],
@@ -49,8 +52,12 @@ export class ConfigExamComponent implements OnInit {
   }
 
   changeAnswer(form){
-    this.radioAnswer = form.radioQuestion == "ENGLISH" ? "SPANISH" : "ENGLISH";
+    this.radioAnswer = form.questionLanguaje == "ENGLISH" ? "SPANISH" : "ENGLISH";
   }
+
+  activateTime(){
+    this.form.controls.time.disabled ? this.form.controls.time.enable() : this.form.controls.time.disable();
+   }
 
   
 

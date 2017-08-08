@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms"
 
 import { Question } from '../_beans/question';
 import { QuestionMultichoice } from '../_beans/questionMultichoice';
+import { Option } from '../_beans/option';
 import { ConfigExam} from '../_beans/configExam';
 
 import { ExamToScoreEvent} from '../_events/exam_to_score.event';
@@ -33,10 +34,12 @@ export class ExamComponent implements OnInit {
     getWritingExamRq: GetWritingExamRq;
     getMultichoiceExamRq: GetMultichoiceExamRq;
 
-    questions: Question[];
+    questions: Question[] = [];
     questionMultichoices: QuestionMultichoice[];
+    keys: String[];
 
-    question: Question;    
+    question: Question;
+    questionMultichoice: QuestionMultichoice;
     position: number = 1;
     countAnswer: number;
     correctAnswers: number = 0;
@@ -50,13 +53,21 @@ export class ExamComponent implements OnInit {
   
 
   ngOnInit() {
+
+    console.log("CONFIG: "+JSON.stringify(this.configExam));
+
     this.createControls();
-    this.getWritingExam();
+
+    if(this.configExam.typeAnswer == "WRITING"){
+      this.getWritingExam();
+    } else if(this.configExam.typeAnswer == "MULTICHOICE"){
+      this.getMultichoiceExam();
+    }
   }
 
   createControls(){
     this.form = this.formBuilder.group({
-      answer: ['leoo', Validators.required]
+      answer: ['', Validators.required]
     })
   }
 
@@ -72,22 +83,43 @@ export class ExamComponent implements OnInit {
       this.examService.getWritingExam(this.getWritingExamRq).subscribe(
         response => this.questions = response.questions,
         error => console.log(error),
-        // () => console.log("res: "+JSON.stringify(this.questions))
         () => {
           this.countAnswer = this.questions.length;
-          this.createQuestion();
+          this.createWriteQuestion();
         }
       );
   }
 
-  createQuestion(){
+  getMultichoiceExam(): void {
+      this.getMultichoiceExamRq = new GetMultichoiceExamRq();
+      this.getMultichoiceExamRq.requestId = "123456789";
+      this.getMultichoiceExamRq.requestDate = new Date();
+      this.getMultichoiceExamRq.userId = "lsolano";
+      this.getMultichoiceExamRq.lessonId = this.id;
+      this.getMultichoiceExamRq.configExam = this.configExam;
+      this.getMultichoiceExamRq.vocabularyType = this.vocabularyType;
+
+      this.examService.getMultichoiceExam(this.getMultichoiceExamRq).subscribe(
+        response => this.questionMultichoices = response.questions,
+        error => console.log(error),
+        () => {
+          console.log("resp: "+JSON.stringify(this.questionMultichoices));
+          this.countAnswer = this.questionMultichoices.length;
+          this.keys = Object.keys(this.questionMultichoices);
+          this.createMultichoiceQuestion();
+        }
+      );
+  }
+
+  createWriteQuestion(){
     this.question = this.questions[this.position - 1];
-    console.log("LEO "+this.countAnswer + " -> "+JSON.stringify(this.question));
+  }
+
+  createMultichoiceQuestion(){
+    this.questionMultichoice = this.questionMultichoices[this.position - 1];
   }
 
   validateQuestion(){
-    console.log("TEXTO: "+this.form.value.answer + " ("+this.question.answer.toUpperCase()+" - "+this.form.value.answer.toUpperCase()+")");
-
     //Add user answer to question object
     this.question.answerUser = this.form.value.answer.trim();
 
@@ -107,9 +139,41 @@ export class ExamComponent implements OnInit {
       this.position += 1;
       this.question = this.questions[this.position - 1];
     } else {
-      console.log("SE ACABOOO: "+JSON.stringify(this.questions));
       this.showScore();
     }
+
+    //Reset Controls
+    this.createControls();
+    this.form.controls.answer.setValue("hh", {focus});
+    // this.form.controls.answer.focus();
+  }
+
+  validateMultichoiceQuestion(){
+    //Validate the question
+    if(this.questionMultichoice.question.answer.toUpperCase() === this.form.value.answer.trim().toUpperCase()){
+      this.correctAnswers += 1;
+      this.questionMultichoice.question.check = "CORRECT";
+    } else {
+      this.mistakes += 1;
+      this.questionMultichoice.question.check = "ERROR";
+    }
+
+    //Add user answer to question object
+    this.questionMultichoice.question.answerUser = "("+this.form.value.answer.trim()+") "+this.getAnswerByLetter(this.questionMultichoice.options, this.form.value.answer);
+    this.questionMultichoice.question.answer = "("+this.questionMultichoice.question.answer+") "+this.getAnswerByLetter(this.questionMultichoice.options, this.questionMultichoice.question.answer);
+    
+    //Add question to array
+    this.questions.push(this.questionMultichoice.question);
+
+    if(this.position < this.countAnswer){
+      this.position += 1;
+      this.questionMultichoice = this.questionMultichoices[this.position - 1];
+    } else {
+      this.showScore();
+    }
+
+    //Reset Controls
+    this.createControls();
   }
 
   showScore(){
@@ -122,19 +186,20 @@ export class ExamComponent implements OnInit {
 
     this.examToScoreEvent.emit(examToScore);
   }
-
-//   goToLesson(){
-//     this.option.emit("class");
-//   }
-
-//   goToExam(){
-//     this.configExam.emit(this.form.value);
-//   }
-
-//   changeAnswer(form){
-//     this.radioAnswer = form.radioQuestion == "ENGLISH" ? "SPANISH" : "ENGLISH";
-//   }
-
   
+  getAnswerByLetter(options: Option[], letter: string): string {
+    let resp = options.filter(item => item.id == letter);
+    return resp[0].value;
+  }
+
+  validate(key){
+    if(this.form.value.answer && key.which == 13) {
+        this.validateQuestion();
+    }
+  }
+
+  play(event) {
+    event.target.firstElementChild.play();
+  }
 
 }

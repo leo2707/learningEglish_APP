@@ -25,7 +25,7 @@
 <br>
 
 <!--WRITING EXAM-->
-<div *ngIf="question && configExam.typeQuestion == 'WRITING'">
+<div *ngIf="question && configExam.typeAnswer == 'WRITING'">
     <div class="row justify-content-md-center">
         <div class="col-md-6">
             <div class="card">
@@ -33,7 +33,7 @@
                 <div class="card-header card-inverse card-primary mb-3 text-center" style="font-weight: bold;">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <label>{{question.question}} is?</label>
+                            <label>{{question.questionText}} ?</label>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                             <div class="col-md-12">
                                 <label class="control-label">Answer</label>
                                 <br>
-                                <input class="form-control answer" type="text" formControlName="answer" />
+                                <input class="form-control answer" type="text" formControlName="answer" [autofocus]="true" (keypress)="validate($event)" />
                             </div>
                         </div>
                     </form>
@@ -53,10 +53,59 @@
                 <div class="card-footer">
                     <div class="text-right">
                         <div *ngIf="position < countAnswer; else other_content_button">
-                            <button type="button" class="btn btn-primary next" (click)="validateQuestion()">Next</button>
+                            <button type="button" class="btn btn-primary next" (click)="validateQuestion()" [disabled]="!form.valid">Next</button>
                         </div>
                         <ng-template #other_content_button>
-                            <button type="button" class="btn btn-primary finish" (click)="validateQuestion()">Finish</button>
+                            <button type="button" class="btn btn-primary finish" (click)="validateQuestion()" [disabled]="!form.valid">Finish</button>
+                        </ng-template>
+                    </div>
+                </div>
+
+            </div>
+            <!--FIN PANEL-->
+
+        </div>
+    </div>
+</div>
+
+<!--MULTICHOICE EXAM-->
+<div *ngIf="questionMultichoice && configExam.typeAnswer == 'MULTICHOICE'">
+    <div class="row justify-content-md-center">
+        <div class="col-md-6">
+            <div class="card">
+                <!--HEADER-->
+                <div class="card-header card-inverse card-primary mb-3 text-center" style="font-weight: bold;">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <label *ngIf="configExam.typeQuestion == 'TEXT'; else other_content_type_question">{{questionMultichoice.question.questionText}} ?</label>
+                            <ng-template #other_content_type_question> 
+                                <span class="input-group-addon icon-volume-medium" (click)="play($event);"><audio src="/assets/sounds/lesson/{{ id }}/{{ questionMultichoice.question.questionAudio }}"></audio></span>
+                            </ng-template>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--BODY-->
+                <div class="card-block">
+                    <form novalidate [formGroup]="form">
+                        <div class="row">
+                            <div *ngFor="let option of questionMultichoice.options" class="col-md-6">
+                                <label class="radio-inline" style="font-size: 15px">
+                                    <input type="radio" name="answer" formControlName="answer" value="{{option.id}}"/> <strong>{{option.id}})</strong> {{option.value}}
+                                </label>                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer">
+                    <div class="text-right">
+                        <div *ngIf="position < countAnswer; else other_content_button">
+                            <button type="button" class="btn btn-primary next" (click)="validateMultichoiceQuestion()" [disabled]="!form.valid">Next</button>
+                        </div>
+                        <ng-template #other_content_button>
+                            <button type="button" class="btn btn-primary finish" (click)="validateMultichoiceQuestion()" [disabled]="!form.valid">Finish</button>
                         </ng-template>
                     </div>
                 </div>

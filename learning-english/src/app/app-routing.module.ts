@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LessonComponent } from './lesson/lesson.component';
 import { LessonImagesComponent } from './lesson/images/lessonImages.component';
-import { LessonVerbsComponent } from './lesson/custom/lesson.verbs.component';
+
+import { LessonVerbsComponent } from './lesson/custom/verbs/lesson.verbs.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'}, //Redireccionamos a home por defecto

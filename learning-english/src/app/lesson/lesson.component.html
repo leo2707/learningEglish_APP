@@ -1,10 +1,3 @@
-<button class="btn btn-primary config-exam" *ngIf="lesson" (click)="changeOption('config')"><span class="icon-redo2"></span> Go to the exam</button>
-<br>
-<input type="text" (keydown)="keyPress($event)"/>
-<br>
-{{lesson | json}}
-<br>
-
 <div *ngIf="lesson">
     <!-- CLASS LESSON -->
     <div *ngIf="option == 'class'">
@@ -13,6 +6,13 @@
             <span *ngIf="lesson" class="ico-tab-lesson {{lesson.icon}}"> {{lesson.name | capitalize}}</span>
             <hr>
         </div>
+
+        <div class="col">
+            <button routerLink="/home" class="btn btn-primary return-home"><span class="icon-home"></span> Home</button>
+            <button class="btn btn-primary config-exam" *ngIf="lesson" (click)="changeOption('config')"><span class="icon-redo2"></span> Exam</button>
+        </div>
+
+        <br>
         
         <!-- *** LESSON - GRAMMAR *** -->
         <lesson-grammar *ngIf="lesson.lessonType.id == '1'" [id]="lesson.id" (length)="getLength($event)"></lesson-grammar>
@@ -21,16 +21,23 @@
         <lesson-images *ngIf="lesson.lessonType.id == '3'" [id]="lesson.id" (length)="getLength($event)"></lesson-images>
 
         <!-- *** LESSON - CUSTOM *** -->
-        <!--VERBS-->
-        <lesson-verbs *ngIf="lesson.lessonType.id == '4' && (lesson.id == '13_1' || lesson.id == '13_2')" [id]="lesson.id" (length)="getLength($event)"></lesson-verbs>
+        <div *ngIf="lesson.lessonType.id == '4'">
+            <!-- COLORS -->
+            <lesson-colors *ngIf="lesson.id == '2_1'" [id]="lesson.id" (length)="getLength($event)"></lesson-colors>
+            <!-- VERBS -->
+            <lesson-verbs *ngIf="lesson.id == '13_1' || lesson.id == '13_2'" [id]="lesson.id" (length)="getLength($event)"></lesson-verbs>
+        </div>
+
+        <!-- *** LESSON - VOCABULARY *** -->
+        <lesson-vocabulary *ngIf="lesson.lessonType.id == '5'" [id]="lesson.id" (length)="getLength($event)"></lesson-vocabulary>
     
         <!-- FOOTER -->
         <footer class="fixedfooter">
             <hr>
             {{option}}
             <div class="col text-center">
-            <button routerLink="/home" class="btn btn-primary return-home"><span class="icon-home"></span> Return home</button>
-            <button class="btn btn-primary config-exam" *ngIf="lesson" (click)="changeOption('config')"><span class="icon-redo2"></span> Go to the exam</button>
+                <button routerLink="/home" class="btn btn-primary return-home"><span class="icon-home"></span> Return home</button>
+                <button class="btn btn-primary config-exam" *ngIf="lesson" (click)="changeOption('config')"><span class="icon-redo2"></span> Go to the exam</button>
             </div>
             <br>
         </footer>
