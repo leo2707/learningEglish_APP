@@ -67,3 +67,15 @@ img.resize{
 .input-group-addon.icon-volume-medium:hover{
     color: #286090;
 }
+.card-title-top{
+    margin-bottom: 0.75rem;
+}
+.card-title-bottom{
+    margin-top: 0.75rem;
+}
+.icon-volume-medium{
+    cursor: pointer;
+}
+.img-fluid {
+    height: 128px;
+}

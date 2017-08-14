@@ -58,7 +58,10 @@ export class LessonComponent implements OnInit {
         response => this.lesson = response.lesson,
         error => console.log(error),
         // () => console.log("res: "+JSON.stringify(this.lesson))
-        () => this.getVocabularyType(id)
+        () => {
+          this.getVocabularyType(id);
+          console.log("res: "+JSON.stringify(this.lesson));
+        }
       );
   }
 

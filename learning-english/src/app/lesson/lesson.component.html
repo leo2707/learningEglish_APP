@@ -1,51 +1,59 @@
-<div *ngIf="lesson">
+<div *ngIf="lesson" [ngSwitch]="option">
     <!-- CLASS LESSON -->
-    <div *ngIf="option == 'class'">
+    <div *ngSwitchCase="'class'" [ngSwitch]="lesson.lessonType.id">
 
         <div class="col text-center fixedheader">
-            <span *ngIf="lesson" class="ico-tab-lesson {{lesson.icon}}"> {{lesson.name | capitalize}}</span>
+            <span class="ico-tab-lesson {{lesson.icon}}"> {{lesson.name | capitalize}}</span>
             <hr>
         </div>
 
-        <div class="col">
-            <button routerLink="/home" class="btn btn-primary return-home"><span class="icon-home"></span> Home</button>
-            <button class="btn btn-primary config-exam" *ngIf="lesson" (click)="changeOption('config')"><span class="icon-redo2"></span> Exam</button>
-        </div>
+         <!-- <div class="col">
+            <button routerLink="/home" class="btn btn-primary"><span class="icon-home"></span> Home</button>
+            <button class="btn btn-primary" (click)="changeOption('config')"><span class="icon-redo2"></span> Exam</button>
+        </div> 
 
-        <br>
+        <br> -->
         
         <!-- *** LESSON - GRAMMAR *** -->
-        <lesson-grammar *ngIf="lesson.lessonType.id == '1'" [id]="lesson.id" (length)="getLength($event)"></lesson-grammar>
+        <lesson-grammar *ngSwitchCase="'1'" [id]="lesson.id" (length)="getLength($event)"></lesson-grammar>
 
-        <!-- *** LESSON - IMAGES *** -->
-        <lesson-images *ngIf="lesson.lessonType.id == '3'" [id]="lesson.id" (length)="getLength($event)"></lesson-images>
+        <!-- *** LESSON - GRAPHICS IMAGES *** -->
+        <lesson-graphics-images *ngSwitchCase="'2'" [id]="lesson.id" (length)="getLength($event)"></lesson-graphics-images>
+
+        <!-- *** LESSON - GRAPHICS TEXTS *** -->
+        <lesson-graphics-texts *ngSwitchCase="'3'" [id]="lesson.id" (length)="getLength($event)"></lesson-graphics-texts>
+        
 
         <!-- *** LESSON - CUSTOM *** -->
-        <div *ngIf="lesson.lessonType.id == '4'">
+        <div *ngSwitchCase="'4'" [ngSwitch]="lesson.id">
             <!-- COLORS -->
-            <lesson-colors *ngIf="lesson.id == '2_1'" [id]="lesson.id" (length)="getLength($event)"></lesson-colors>
-            <!-- VERBS -->
-            <lesson-verbs *ngIf="lesson.id == '13_1' || lesson.id == '13_2'" [id]="lesson.id" (length)="getLength($event)"></lesson-verbs>
+            <lesson-colors *ngSwitchCase="'2_1'" [id]="lesson.id" (length)="getLength($event)"></lesson-colors>
+            <!-- ARTICLES -->
+            <lesson-articles *ngSwitchCase="'9_1'" [id]="lesson.id" (length)="getLength($event)"></lesson-articles>
+            <!-- REGULAR VERBS -->
+            <lesson-verbs *ngSwitchCase="'13_1'" [id]="lesson.id" (length)="getLength($event)"></lesson-verbs>
+            <!-- IRREGULAR VERBS -->
+            <lesson-verbs *ngSwitchCase="'13_2'" [id]="lesson.id" (length)="getLength($event)"></lesson-verbs>
         </div>
 
         <!-- *** LESSON - VOCABULARY *** -->
-        <lesson-vocabulary *ngIf="lesson.lessonType.id == '5'" [id]="lesson.id" (length)="getLength($event)"></lesson-vocabulary>
+        <lesson-vocabulary *ngSwitchCase="'5'" [id]="lesson.id" (length)="getLength($event)"></lesson-vocabulary>
     
         <!-- FOOTER -->
         <footer class="fixedfooter">
             <hr>
             {{option}}
             <div class="col text-center">
-                <button routerLink="/home" class="btn btn-primary return-home"><span class="icon-home"></span> Return home</button>
-                <button class="btn btn-primary config-exam" *ngIf="lesson" (click)="changeOption('config')"><span class="icon-redo2"></span> Go to the exam</button>
+                <button routerLink="/home" class="btn btn-primary"><span class="icon-home"></span> Return home</button>
+                <button class="btn btn-primary" (click)="changeOption('config')"><span class="icon-redo2"></span> Go to the exam</button>
             </div>
             <br>
         </footer>
     </div>
     <!-- CONFIG EXAM -->
-    <config-exam *ngIf="option == 'config'" [lesson]="lesson" (option)="getOption($event)" (configExam)="getConfigExam($event)"></config-exam>
+    <config-exam *ngSwitchCase="'config'" [lesson]="lesson" (option)="getOption($event)" (configExam)="getConfigExam($event)"></config-exam>
     <!-- EXAM -->
-    <exam *ngIf="option == 'exam'" [id]="lesson.id" [configExam]="configExam" [vocabularyType]="vocabularyType" (optionEvent)="getOption($event)" (examToScoreEvent)="getExamToScoreEvent($event)"></exam>
+    <exam *ngSwitchCase="'exam'" [id]="lesson.id" [configExam]="configExam" [vocabularyType]="vocabularyType" (optionEvent)="getOption($event)" (examToScoreEvent)="getExamToScoreEvent($event)"></exam>
     <!-- SCORE -->
-    <score *ngIf="option == 'score'" [examToScoreEvent]="examToScoreEvent" (optionEvent)="getOption($event)"></score>
+    <score *ngSwitchCase="'score'" [examToScoreEvent]="examToScoreEvent" (optionEvent)="getOption($event)"></score>
 </div>

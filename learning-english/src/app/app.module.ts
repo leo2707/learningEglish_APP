@@ -10,8 +10,10 @@ import { HomeComponent } from './home/home.component';
 
 import { LessonComponent } from './lesson/lesson.component';
 import { LessonGrammarComponent } from './lesson/grammar/lesson.grammar.component';
-import { LessonImagesComponent } from './lesson/images/lessonImages.component';
+import { LessonGraphicsTextsComponent } from './lesson/graphicText/lessonGraphicsTexts.component';
+import { LessonGraphicsImagesComponent } from './lesson/graphicsImages/lessonGraphicsImages.component';
 import { LessonColorsComponent } from './lesson/custom/colors/lessonColors.component';
+import { LessonArticlesComponent } from './lesson/custom/articles/lessonArticles.component';
 import { LessonVerbsComponent } from './lesson/custom/verbs/lesson.verbs.component';
 import { LessonVocabularyComponent } from './lesson/vocabulary/lessonVocabulary.component';
 
@@ -33,8 +35,10 @@ import { KeysPipe } from './util/_pipes/KeysPipe.pipe';
     HomeComponent,
     LessonComponent,
     LessonGrammarComponent,
-    LessonImagesComponent,
+    LessonGraphicsTextsComponent,
+    LessonGraphicsImagesComponent,
     LessonColorsComponent,
+    LessonArticlesComponent,
     LessonVerbsComponent,
     LessonVocabularyComponent,
     ConfigExamComponent,

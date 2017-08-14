@@ -2,12 +2,16 @@
 /*@import "theme/css/normalize.css";*/
 /*@import "theme/css/framework/bootstrap/bootstrap.min.css";`*/
 
-@import "theme/icons/general/style.css";
-@import "theme/css/table-style.css";
-@import "theme/css/panel.css";
-@import "theme/css/toggle-switch-button.css";
+@import "/assets/icons/general/style.css";
+@import "/assets/css/table-style.css";
+@import "/assets/css/panel.css";
+@import "/assets/css/toggle-switch-button.css";
 
 
 body {
     background:#e6eecc url("assets/img/background/beige_paper.png") repeat top left;
+}
+
+.card-inverse{
+    opacity: 1;
 }

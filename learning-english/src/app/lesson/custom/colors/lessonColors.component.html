@@ -1,0 +1,36 @@
+<div class="col text-center">
+
+    <div class="row">
+        <ng-container *ngFor="let vocabulary of listVocabulary; let i = index;">
+
+            <div class="col-xs-12 col-md-2 col-lg-2">
+                <div class="card card-title-top">
+                    <div class="card-block text-center">
+                        <!-- ENGLISH -->
+                        <h5 class="card-title-top">
+                            <span *ngIf="vocabulary.englishSound" class="icon-volume-medium" (click)="play($event);"><audio src="/assets/sounds/lesson/{{ id }}/{{ vocabulary.englishSound }}"></audio></span>
+                            <span data-toggle="tooltip" data-placement="bottom" title="{{ vocabulary.englishPronunciation }}">
+                                {{ vocabulary.englishValue }}
+                            </span>
+                        </h5>
+
+                        <!-- IMG -->
+                        <!-- <span class="div-class" [style.background]="vocabulary.otherValue" ></span> -->
+                        <div class="div-class" [style.background]="vocabulary.otherValue"></div>
+
+                        <!-- SPANISH -->
+                        <h5 class="card-title-bottom">
+                            <span *ngIf="vocabulary.spanishSound" class="icon-volume-medium" (click)="play($event);"><audio src="/assets/sounds/lesson/{{ id }}/{{ vocabulary.spanishSound }}"></audio></span>
+                            <span data-toggle="tooltip" data-placement="top" title="{{ vocabulary.spanishPronunciation }}">
+                                {{ vocabulary.spanishValue }}
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+        </ng-container>
+
+    </div>
+</div>
+

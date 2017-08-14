@@ -1,0 +1,29 @@
+<table class="table table-striped table-condensed table-hover-leo">
+        <thead class="thead-blue">
+        <tr class="text-center">
+            <th>#</th>
+            <th>ENGLISH</th>
+            <th>SPANISH</th>
+        </tr>
+        </thead>
+        <tbody style="font-size: 13px;" >
+        <tr *ngFor="let vocabulary of listVocabulary; let i = index;">
+            <td class="text-center">{{i+1}}</td>
+            <!-- <td>{{ vocabulary.englishValue }}</td> -->
+            <td>
+                <span *ngIf="vocabulary.englishSound" class="icon-volume-medium" (click)="play($event);"><audio src="/assets/sounds/lesson/{{ id }}/{{ vocabulary.englishSound }}"></audio></span>
+                <span data-toggle="tooltip" data-placement="bottom" title="{{ vocabulary.englishPronunciation }}">
+                    {{ vocabulary.englishValue }}
+                </span>
+            </td>
+            <td>
+                <span *ngIf="vocabulary.spanishSound" class="icon-volume-medium" (click)="play($event);"><audio src="/assets/sounds/lesson/{{ id }}/{{ vocabulary.spanishSound }}"></audio></span>
+                <span data-toggle="tooltip" data-placement="top" title="{{ vocabulary.spanishPronunciation }}">
+                    {{ vocabulary.spanishValue }}
+                </span>
+            </td>
+        </tr>
+        </tbody>
+      </table>
+
+      
