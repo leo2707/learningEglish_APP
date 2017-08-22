@@ -1,0 +1,45 @@
+<div >
+    <h1 class="col text-center">Home</h1>
+    <hr>
+</div>
+
+
+<ng-container *ngFor="let theme of themes;">
+<div class="card">
+    
+    <div class="card-header card-inverse card-primary mb-3 text-center">
+      <h5 class="mb-0">
+          <span class="{{theme.icon}}"></span> {{theme.name}}
+      </h5>
+    </div>
+
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-3 col-md-6" *ngFor="let lesson of theme.lessons;">
+                <a [routerLink]="['/lesson', lesson.id]">
+                    <div class="card panel-gray grow">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <i class="icon-panel {{lesson.icon}}"></i>
+                                </div>
+                                <div class="col-sm-9 text-right">
+                                    <div class="huge">{{lesson.order}}</div>
+                                    <div>Lesson</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="pull-left text-capitalize">{{lesson.name}}</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>  
+        </div>
+    </div>
+</div>
+<br />
+</ng-container>
+
+

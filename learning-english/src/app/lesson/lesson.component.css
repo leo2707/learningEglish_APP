@@ -78,4 +78,5 @@ img.resize{
 }
 .img-fluid {
     height: 128px;
+    border-radius: 10px;
 }

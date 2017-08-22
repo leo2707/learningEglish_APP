@@ -16,7 +16,8 @@ import {Status} from '../_beans/_generic/status';
 export class ThemeService {
 
   private headers = new Headers({'Content-Type':'application/json'});
-  private url = "http://localhost:8080/RestProvider/rest/learningEnglish";
+  //private url = "http://localhost:8080/RestProvider/rest/learningEnglish";
+  private url = "http://192.168.1.103:8080/RestProvider/rest/learningEnglish";
 
   getAllThemesRs: GetAllThemesRs;
   status: Status;

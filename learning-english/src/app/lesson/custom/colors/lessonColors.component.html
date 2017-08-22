@@ -8,7 +8,7 @@
                     <div class="card-block text-center">
                         <!-- ENGLISH -->
                         <h5 class="card-title-top">
-                            <span *ngIf="vocabulary.englishSound" class="icon-volume-medium" (click)="play($event);"><audio src="/assets/sounds/lesson/{{ id }}/{{ vocabulary.englishSound }}"></audio></span>
+                            <span *ngIf="vocabulary.englishSound" class="icon-volume-medium" (click)="play($event);"><audio src="/assets/sounds/lesson/{{ id }}/ENGLISH/{{ vocabulary.englishSound }}"></audio></span>
                             <span data-toggle="tooltip" data-placement="bottom" title="{{ vocabulary.englishPronunciation }}">
                                 {{ vocabulary.englishValue }}
                             </span>
@@ -20,7 +20,7 @@
 
                         <!-- SPANISH -->
                         <h5 class="card-title-bottom">
-                            <span *ngIf="vocabulary.spanishSound" class="icon-volume-medium" (click)="play($event);"><audio src="/assets/sounds/lesson/{{ id }}/{{ vocabulary.spanishSound }}"></audio></span>
+                            <span *ngIf="vocabulary.spanishSound" class="icon-volume-medium" (click)="play($event);"><audio src="/assets/sounds/lesson/{{ id }}/SPANISH/{{ vocabulary.spanishSound }}"></audio></span>
                             <span data-toggle="tooltip" data-placement="top" title="{{ vocabulary.spanishPronunciation }}">
                                 {{ vocabulary.spanishValue }}
                             </span>
